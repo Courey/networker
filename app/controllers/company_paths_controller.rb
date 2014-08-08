@@ -49,18 +49,25 @@ class CompanyPathsController
         puts "#{company.description}"
       else
         puts "Type 'a' to add description."
-
+        add_description(company)
       end
     else
       puts "Sorry, company #{company_number} doesn't exist."
     end
   end
 
-  # def list_options
-  #   puts "To view a company enter the list number"
-  #   option = clean_gets
-  #
-  # end
+  def add_description(company)
+    command = clean_gets
+    case command
+    when "a"
+      puts "enter your description:"
+      description = clean_gets
+      company.update(description: description)
+      puts company.description
+    else
+      puts "#{command} is not a valid command."
+    end
+  end
 
   private
 
