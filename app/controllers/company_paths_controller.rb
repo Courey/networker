@@ -14,6 +14,7 @@ class CompanyPathsController
       puts "Please enter a company name:"
       add
     when "v"
+      list
     else
       puts "'#{command}' is not a valid option."
     end
@@ -29,5 +30,42 @@ class CompanyPathsController
     end
   end
 
+  def list
+    puts "============"
+    puts "Company List"
+    puts "============"
+
+    companies.each_with_index do |company, index|
+      puts "#{index + 1}. #{company.name}"
+    end
+    Router.navigate_companies(self)
+  end
+
+  def view(company_number)
+    company = companies[company_number - 1]
+    if company
+      puts "==========\n#{company.name}\n=========="
+      if company.description
+        puts "#{company.description}"
+      else
+        puts "Type 'a' to add description."
+
+      end
+    else
+      puts "Sorry, company #{company_number} doesn't exist."
+    end
+  end
+
+  # def list_options
+  #   puts "To view a company enter the list number"
+  #   option = clean_gets
+  #
+  # end
+
+  private
+
+  def companies
+    @companies ||= Company.all
+  end
 
 end
