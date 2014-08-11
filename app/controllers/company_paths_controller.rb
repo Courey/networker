@@ -26,7 +26,7 @@ class CompanyPathsController
     if company.new_record?
       puts company.errors.full_messages
     else
-      puts "#{company} has been added to your list of companies!"
+      puts "#{company.name} has been added to your list of companies!"
     end
   end
 

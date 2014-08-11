@@ -1,4 +1,7 @@
 class Company < ActiveRecord::Base
+  has_many :contacts
+  has_many :jobs
+
   validates_format_of :name, with: /[a-zA-Z]/, message: "must include letters"
   validates_length_of :name, maximum: 30, message: "must be less than 30 characters"
   validates_presence_of :name

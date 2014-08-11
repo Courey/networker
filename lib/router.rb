@@ -10,6 +10,9 @@ class Router
     when "1"
       company_paths_controller = CompanyPathsController.new()
       company_paths_controller.menu_options
+    when "2"
+      contact_paths_controller = ContactPathsController.new()
+      contact_paths_controller.menu_options
     else
       puts "'#{command}' is not a valid option."
     end
@@ -23,6 +26,18 @@ class Router
       company_paths_controller.add
     when /\d+/
       company_paths_controller.view(command.to_i)
+    else
+      puts "I don't know the '#{command}' command."
+    end
+  end
+
+  def self.navigate_contacts(contact_paths_controller)
+    puts "To view a contact enter list number. To add a company type 'add'."
+    case command
+    when "add"
+      contact_paths_controller.add
+    when /\d+/
+      contact_paths_controller.view(command.to_i)
     else
       puts "I don't know the '#{command}' command."
     end
