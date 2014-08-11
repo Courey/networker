@@ -32,7 +32,8 @@ class Router
   end
 
   def self.navigate_contacts(contact_paths_controller)
-    puts "To view a contact enter list number. To add a company type 'add'."
+    puts "To view a contact enter list number. To add a contact type 'add'."
+    command = clean_gets
     case command
     when "add"
       contact_paths_controller.add
