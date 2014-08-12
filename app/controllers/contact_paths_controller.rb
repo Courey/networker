@@ -126,11 +126,25 @@ class ContactPathsController
     puts "#{contact.phone}"
   end
 
+  def add_company(contact)
+    puts "Please enter company list number to add a company to this contact."
+    companies.each_with_index do |company, index|
+      puts "#{index + 1}. #{company.name}"
+    end
+    company_index = clean_gets.to_i
+    company = companies[company_index - 1]
+    contact.update!(company_id: company.id)
+    puts "#{company.name} has been added to #{contact.name}."
+  end
 
   private
 
   def contacts
     @contacts ||= Contact.all
+  end
+
+  def companies
+    @companies ||= Company.all
   end
 
 end
