@@ -29,6 +29,7 @@ class ContactPathsController
       puts contact.errors.full_messages
     else
       puts "#{contact.first_name} #{contact.last_name} has been added to your list of contacts!"
+      Router.main_menu
     end
   end
 
@@ -73,6 +74,8 @@ class ContactPathsController
       else
         puts "Type 'c' to add a company."
       end
+      puts "Type 'q' to quit."
+      puts "Type 'm' to return to the main menu."
       contact_options(contact)
     else
       puts "Sorry, contact #{contact_number} doesn't exist."
@@ -93,6 +96,9 @@ class ContactPathsController
       add_phone(contact)
     when "c"
       add_company(contact)
+    when "m"
+      Router.main_menu
+    when "q"
     else
       puts "#{command} is not a valid option."
     end
@@ -103,6 +109,7 @@ class ContactPathsController
     description = clean_gets
     contact.update!(description: description)
     puts "#{contact.description}"
+    Router.main_menu
   end
 
   def add_title(contact)
@@ -110,6 +117,7 @@ class ContactPathsController
     title = clean_gets
     contact.update!(title: title)
     puts "#{contact.title}"
+    Router.main_menu
   end
 
   def add_email(contact)
@@ -117,6 +125,7 @@ class ContactPathsController
     email = clean_gets
     contact.update!(email: email)
     puts "#{contact.email}"
+    Router.main_menu
   end
 
   def add_phone(contact)
@@ -124,6 +133,7 @@ class ContactPathsController
     number = clean_gets
     contact.update!(phone: number)
     puts "#{contact.phone}"
+    Router.main_menu
   end
 
   def add_company(contact)
@@ -134,7 +144,8 @@ class ContactPathsController
     company_index = clean_gets.to_i
     company = companies[company_index - 1]
     contact.update!(company_id: company.id)
-    puts "#{company.name} has been added to #{contact.name}."
+    puts "#{company.name} has been added to #{contact.first_name} #{contact.last_name}."
+    Router.main_menu
   end
 
   private

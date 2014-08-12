@@ -1,7 +1,8 @@
 class Router
 
   def self.main_menu
-    puts "1. Companies\n 2. Contacts\n 3. Jobs"
+    puts "1. Companies\n2. Contacts\n3. Jobs\n4. Search\n5. Press 'q' to quit"
+    Router.routing
   end
 
   def self.routing
@@ -16,6 +17,10 @@ class Router
     when "3"
       job_paths_controller = JobPathsController.new()
       job_paths_controller.menu_options
+    when "4"
+      search_controller = SearchController.new()
+      search_controller.menu_options
+    when "q"
     else
       puts "'#{command}' is not a valid option."
     end

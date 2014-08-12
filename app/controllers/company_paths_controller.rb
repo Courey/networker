@@ -49,11 +49,14 @@ class CompanyPathsController
         puts "#{company.description}"
       else
         puts "Type 'a' to add description."
-        add_description(company)
       end
+      puts "Type 'q' to quit."
+      puts "Type 'm' to return to the main menu."
+      add_description(company)
     else
       puts "Sorry, company #{company_number} doesn't exist."
     end
+
   end
 
   def add_description(company)
@@ -64,6 +67,9 @@ class CompanyPathsController
       description = clean_gets
       company.update(description: description)
       puts company.description
+    when "m"
+      Router.main_menu
+    when "q"
     else
       puts "#{command} is not a valid command."
     end

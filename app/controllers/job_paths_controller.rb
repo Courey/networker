@@ -27,6 +27,7 @@ class JobPathsController
       puts job.errors.full_messages
     else
       puts "#{job.name} has been added to your job list!"
+      Router.main_menu
     end
   end
 
@@ -61,6 +62,7 @@ class JobPathsController
       else
         puts "Type 'r' to add requirements."
       end
+      puts "Type 'q' to quit."
       job_options(job)
     else
       puts "Sorry, job #{job_number} doesn't exist."
@@ -76,6 +78,7 @@ class JobPathsController
       add_requirements(job)
     when "c"
       add_company(job)
+    when "q"
     else
       puts "#{command} is not a valid option."
     end
@@ -86,13 +89,15 @@ class JobPathsController
     description = clean_gets
     job.update!(description: description)
     puts "#{job.description}"
+    Router.main_menu
   end
 
   def add_requirements(job)
-    puts "enter contact title:"
+    puts "enter job requirements:"
     requirements = clean_gets
     job.update!(requirements: requirements)
     puts "#{job.requirements}"
+    Router.main_menu
   end
 
   def add_company(job)
@@ -104,6 +109,7 @@ class JobPathsController
     company = companies[company_index - 1]
     job.update!(company_id: company.id)
     puts "#{company.name} has been added to #{job.name}."
+    Router.main_menu
   end
 
   private

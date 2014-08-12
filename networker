@@ -11,7 +11,7 @@ end
 
 puts IO.readlines('header.txt')
 Router.main_menu
-Router.routing
+# Router.routing
 
 # training_paths_controller = TrainingPathsController.new()
 # training_paths_controller.list

@@ -10,9 +10,9 @@ Networker
       expect(actual).to include(expected)
     end
 
-    it "shows three options" do
+    it "shows four options" do
       actual = run_networker_with_input()
-      expected = "1. Companies\n 2. Contacts\n 3. Jobs"
+      expected = "1. Companies\n2. Contacts\n3. Jobs\n4. Search\n5. Press 'q' to quit"
       expect(actual).to include(expected)
     end
   end
