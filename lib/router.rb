@@ -13,6 +13,9 @@ class Router
     when "2"
       contact_paths_controller = ContactPathsController.new()
       contact_paths_controller.menu_options
+    when "3"
+      job_paths_controller = JobPathsController.new()
+      job_paths_controller.menu_options
     else
       puts "'#{command}' is not a valid option."
     end
@@ -39,6 +42,19 @@ class Router
       contact_paths_controller.add
     when /\d+/
       contact_paths_controller.view(command.to_i)
+    else
+      puts "I don't know the '#{command}' command."
+    end
+  end
+
+  def self.navigate_jobs(job_paths_controller)
+    puts "To view a job enter list number. To add a job type 'add'."
+    command = clean_gets
+    case command
+    when "add"
+      job_paths_controller.add
+    when /\d+/
+      job_paths_controller.view(command.to_i)
     else
       puts "I don't know the '#{command}' command."
     end
