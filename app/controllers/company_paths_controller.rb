@@ -27,6 +27,7 @@ class CompanyPathsController
       puts company.errors.full_messages
     else
       puts "#{company.name} has been added to your list of companies!"
+      Router.main_menu
     end
   end
 

@@ -104,18 +104,22 @@ class SearchController
   def search_by_job
     puts "Enter a job title to search by position."
     job_title = clean_gets
-    job_list = Job.where(name: job_title)
-    puts "=========================="
-    puts "Job Search by Job Title"
-    puts "=========================="
-    if job_list
-      job_list.each_with_index do |job, index|
-        puts "#{index + 1}. #{job.name}"
+    unless job_title == ""
+      job_list = Job.where(name: job_title)
+      puts "=========================="
+      puts "Job Search by Job Title"
+      puts "=========================="
+      if job_list
+        job_list.each_with_index do |job, index|
+          puts "#{index + 1}. #{job.name}"
+        end
+        puts "To view job details enter index number."
+        command = clean_gets.to_i
+        job = job_list[command - 1]
+        view_job(job)
       end
-      puts "To view job details enter index number."
-      command = clean_gets.to_i
-      job = job_list[command - 1]
-      view_job(job)
+    else
+      puts "You must enter a job title to search."
     end
   end
 
@@ -129,12 +133,16 @@ class SearchController
   end
 
   def search_by_company_with_contact
+    limit = "0"
     puts "=========================="
     puts "Companies with Contacts"
     puts "=========================="
-    Contact.where(include: :company_id) do |contact|
-      company = Company.where(id: contact.company_id)
-      puts "#{index + 1}. #{company.name}"
+    contacts_list = Contact.where("company_id >= ?", limit)
+    contacts_list.each do |contact|
+      company = Company.find(contact.company_id)
+      puts "#{contact.first_name} #{contact.last_name}"
+      puts "Company: #{company.name}"
+      puts ""
     end
     menu_loop_or_exit
   end

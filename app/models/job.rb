@@ -12,6 +12,4 @@ class Job < ActiveRecord::Base
   validates_format_of :requirements, with: /[a-zA-Z]/, message: "must include letters", on: :update, allow_nil: true
   validates_length_of :requirements, maximum: 130, message: "must be less than 130 characters", on: :update, allow_nil: true
   validates_presence_of :requirements, on: :update, allow_nil: true
-
-  # validates_associated :company, on: :update, allow_nil: true
 end
